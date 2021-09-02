@@ -1,17 +1,25 @@
 ---
 # tasks file for webapp 
-- copy: 
+- name: Ensure stub web content is deployed
+  copy: 
     content: "{{ webapp_message }} (version {{ webapp_version }})\n" 
     dest: "{{ webapp_content_root_dir }}/index.html"
 
+- name: Find deployed webapp files
+  find:
+    paths: "{{ webapp_content_root_dir }}"
+    recurse: yes
+  register: webapp_find_files
+
+
 - name: Compute the webapp file List
   set_fact:
-    # TODO: Use the map filter to extract the path' attribute of each entry
-    # in the webapp find files variable 'files' list.
+    # TODO: Use the map filter to extract the 'path' attribute of each entry
+    # in the 'webapp_find_files' variable 'files' list.
     webapp_deployed_files: []
 
 - name: Compute the relative webapp file list
-  set_fact
+  set_fact:
     # TODO: Use the fitter, along with the 'relpath' filter, to create the
     # 'webapp_rel_deployed_files' variable from the 'webapp_deployed_files' variable.
     #
@@ -25,4 +33,4 @@
     state: absent
   # TODO: Loop over a List of files that are in the 'webapp_rel_deployed_file'
   # List, but not in the 'webapp_file_list' List. Use the difference filter.
-  Loop: []
+  loop: []
