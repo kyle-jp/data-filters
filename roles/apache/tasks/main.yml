@@ -4,7 +4,7 @@
 - name: Calculate the package list 
   set_fact:
   # TODO: Combine the apache_base_packages and apache_optional_packages variables into one list.
-  apache_package_list: "{{ apache_base_packages }}"
+    apache_package_list: "{{ apache_base_packages }}"
 
 - name: Ensure httpd packages are installed 
   yum:
