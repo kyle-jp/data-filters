@@ -2,4 +2,5 @@ firewall_rules:
   #allow http requests from the load_balancer.
   - zone: internal
     service: http
+  - zone: internal
     source: "192.168.16.79"
